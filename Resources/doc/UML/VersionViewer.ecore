@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="">
+  <eClassifiers xsi:type="ecore:EClass" name="ReleaseFile">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="releaseDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="releaseTag"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EReference0" eType="#//AppInstance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Application">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="appName"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="apphost"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="appHostProd"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="versionManager">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="group" value="instancie"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="versionValidator">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="group" value="instancie"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instancie" lowerBound="1"
+        eType="#//VersionValidator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instancie" lowerBound="1"
+        eType="#//VersionManager"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instancie" upperBound="-1"
+        eType="#//AppInstance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AppInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="possède" upperBound="-1"
+        eType="#//Application"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="référence" lowerBound="1"
+        eType="#//Environment">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="référence"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="environment" lowerBound="1">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="group" value=""/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instancie" lowerBound="1"
+        eType="#//ReleaseFile"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="backupName"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="urlSQL"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="urlStorage"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="releaseFile">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="group" value="EReference0"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Environment">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="host"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="trigram"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass0"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AppContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Applist" upperBound="-1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Envlist" upperBound="-1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instancie" upperBound="-1"
+        eType="#//Application"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instancie" upperBound="-1"
+        eType="#//Environment"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VersionManager">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="colorManager"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instancie" eType="#//ColorManager"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VersionValidator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ColorManager">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EReference0" eType="#//VersionManager"/>
+  </eClassifiers>
+</ecore:EPackage>

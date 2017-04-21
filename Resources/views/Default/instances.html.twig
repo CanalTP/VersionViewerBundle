@@ -1,0 +1,30 @@
+<div class="row" id="{{ app.AppKey }}">
+  <h2 id="{{ app.appKey }}">
+    <a href="{{  path('bbr_version_viewer_LoadApplication', { 'appHost': app.getAppKey })  }}" class="refreshApp" {% if analytics %}trackAppLoad('{{ app.name }}', 'Application Name'){% endif %}>
+        {{ app.name }} 
+  		<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+  	</a> 
+  </h2>
+    <div class="message"></div>
+  {% for appInstance in app.getAppInstances %}
+  <div class="highlight col-lg-2 {{ appInstance.getEnvironment.getTrigram }} ">
+    <ul class="list-unstyled {{ appInstance.getColor }} instance-infos" id="{{ app.getAppKey }}_{{ appInstance.getEnvironment.getTrigram }}">
+      <li >
+          <span class="label label-danger">{{  appInstance.getEnvironment.getName  }}</span>
+      </li>
+      <li class="error"></li>
+      <li class="properties"></li>
+      <li>
+        <img class="loading" src="{{ asset('bundles/bbrversionviewer/img/ajax-loader.gif') }}" alt="loading ..." style="display: none;"/>
+        <a href="{{ path('bbr_version_viewer_LoadInstance', { 'appHost': app.getAppKey, 'env' : appInstance.getEnvironment.getTrigram })  }}" title="rafraichir les infos" class="refreshInstance lnk" {% if analytics %}trackAppLoad('{{  app.name }} {{ appInstance.getEnvironment.getTrigram }}', 'Application instance'){% endif %}>
+        	<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+        </a>
+        {# for loading via exec loading like nrpe don't dispay href tag #}
+        <a {% if app.appType.releaseFileLoaderType is null %} href="{{ appInstance.releaseFile.command }}" {% endif %} target="_blank" data-toggle="tooltip" title="Commande : {{ appInstance.releaseFile.command }} " class="lnk">
+        	<span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  {% endfor %}{#end instance loop#}
+</div>

@@ -1,0 +1,16 @@
+{
+  "instances" : {
+    {% set count = appInstances|length %}
+    {% set i = 0 %}
+    {% for appInstance in appInstances %}
+      "{{ appInstance.getEnvironment.getTrigram }}": {
+          "color": "{{ appInstance.getColor }}",
+          "properties" :{{ appInstance.getReleaseFile.getPropertiesJson|raw }},
+          "errors": {{ appInstance.releaseFile.errors|json_encode(constant('JSON_PRETTY_PRINT'))|raw }},
+          "warnings": {{ appInstance.releaseFile.warnings|json_encode(constant('JSON_PRETTY_PRINT'))|raw }} 
+          
+      }{% set i = i+1  %}{% if i < count %},{% endif %}
+    {% endfor %}
+  },
+  "messages" : {{ messages|raw }}
+}

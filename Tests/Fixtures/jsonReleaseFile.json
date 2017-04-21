@@ -1,0 +1,15 @@
+{
+ "mails": {
+  "mails_count_sended": "1",
+  "mails_count_to_send": "10"
+ },
+ "connector": {
+  "last_received": "2017-01-16T09:46:15Z",
+  "traitement": true
+ },
+ "application": {
+  "status": "OK",
+  "tmp": "var"
+ },
+ "testing": "test"
+}

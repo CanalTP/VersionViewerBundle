@@ -1,0 +1,7 @@
+parameters:
+#    bbr_version_viewer.example.class: Bbr\VersionViewerBundle\Example
+
+services:
+#    bbr_version_viewer.example:
+#        class: %bbr_version_viewer.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

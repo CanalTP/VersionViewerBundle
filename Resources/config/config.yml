@@ -1,0 +1,7 @@
+parameters:
+    bbr_version_viewer.appConfig:
+        version: 0.17.1
+        feedback_email:
+          is_active: false
+#          to: ~
+#          from: ~
