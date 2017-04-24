@@ -10,7 +10,9 @@ use Bbr\VersionViewerBundle\Applications\ReleaseFileLoader\AbstractReleaseFileLo
  */
 class URLParameter implements AuthenticationHandler{
 
-    /**@var parameters */
+    /**
+     * @var array[string] parameters 
+     * */
     private $params;
 
     /**
@@ -21,7 +23,7 @@ class URLParameter implements AuthenticationHandler{
     }
 
     public function authenticate(AbstractReleaseFileLoader $loader){
-
+        
         foreach($this->params as $key => $value){
             if(strpos($loader->getUrl(), '?')){
                 $paramSeparator = '&';

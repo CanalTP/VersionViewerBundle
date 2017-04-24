@@ -269,12 +269,14 @@ elseif (isset($configuration['default'])) {
      */
     public function getRessourceCommand()
     {
-        return $this->buildUrl();
+        $this->url = $this->buildUrl();
+        $this->authenticate();
+        return $this->url;
     }
 
     /**
      *
-     * @return the array[array]context
+     * @return array[array] context
      */
     public function getContextOptions()
     {
@@ -283,7 +285,7 @@ elseif (isset($configuration['default'])) {
 
     /**
      *
-     * @return the Environment
+     * @return Environment environment
      */
     public function getEnvironment()
     {
@@ -292,7 +294,7 @@ elseif (isset($configuration['default'])) {
 
     /**
      *
-     * @return the unknown_type
+     * @return boolean true if https
      */
     public function getHttps()
     {
