@@ -16,12 +16,27 @@
       <li class="properties"></li>
       <li>
         <img class="loading" src="{{ asset('bundles/bbrversionviewer/img/ajax-loader.gif') }}" alt="loading ..." style="display: none;"/>
-        <a href="{{ path('bbr_version_viewer_LoadInstance', { 'appHost': app.getAppKey, 'env' : appInstance.getEnvironment.getTrigram })  }}" title="refresh this instance only" class="refreshInstance lnk" {% if analytics %}trackAppLoad('{{  app.name }} {{ appInstance.getEnvironment.getTrigram }}', 'Application instance'){% endif %}>
+        <a href="{{ path('bbr_version_viewer_LoadInstance', { 'appHost': app.getAppKey, 'env' : appInstance.getEnvironment.getTrigram })  }}" 
+           title="refresh this instance only" 
+           class="refreshInstance lnk"
+           {% if analytics %} 
+                onclick="trackAppLoad('{{  app.name }} {{ appInstance.getEnvironment.getTrigram }}', 'Application instance')"
+           {% endif %}>
         	<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
         </a>
-        {# for loading via exec loading like nrpe don't dispay href tag #}
-        <a {% if app.appType.releaseFileLoaderType is null %} href="{{ appInstance.releaseFile.command }}" {% endif %} target="_blank" data-toggle="tooltip" title="Command : {{ appInstance.releaseFile.command }} " class="lnk">
-        	<span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+        {# for loading via exec loading like nrpe don't dispay href tag, if null default config => http#}
+        <a {% if app.appType.releaseFileLoaderType is null %} 
+                href="{{ appInstance.releaseFile.command }}" 
+           {% endif %} 
+           target="_blank" 
+           data-toggle="tooltip" 
+           title="Command : {{ appInstance.releaseFile.command }} " 
+           class="lnk"
+           {% if analytics %}
+                onclick="trackReleaseFileReach('{{  app.name }} {{ appInstance.getEnvironment.getName }}', 'Application instance')"
+           {% endif %}>
+
+            <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
         </a>
       </li>
     </ul>

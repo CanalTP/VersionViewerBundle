@@ -10,9 +10,17 @@
   /**
   * Send a google analytics event to track application load
   */
-  function trackAppLoad(appName, loadType){
-	    ga('send', 'event', appName, loadType, 'Application Loading');
-	    /*console.log(" event sended ! " + appName +" / "+ loadType)*/
+  function trackAppLoad(appName, loadSource){
+	    ga('send', 'event', appName, loadSource, 'Application Loading');
+	    /* alert(" event sended ! " + appName +" / "+ loadSource +" / Application Loading"); */
+  }
+
+  /**
+  * Send a google analytics event to track release file reach
+  */
+  function trackReleaseFileReach(appName, reachSource){
+	  ga('send', 'event', appName, reachSource, 'Reach release file');
+	  /* alert(" event sended ! " + appName +" / "+ reachSource + " / Reach release file"); */
   }
   
 </script>
