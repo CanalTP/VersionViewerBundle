@@ -51,8 +51,16 @@ abstract class Application
     /**
      *
      * @var array[Environment] List of all available Environments in configuration (not only for this particular application)
+     * @todo should be moved in an application builder
      */
     private $environments = array();
+
+    /**
+     *
+     * @var array[string] List of all available URLHandlers (not only for this particular application)
+     * @todo should be moved in an application builder
+     */
+    private $urlHandlersConfigs = array();
 
     /**
      * Instancie chaque version de l'application selon les environnements définis dans la configruation
@@ -61,20 +69,21 @@ abstract class Application
      *            : la configuration de l'application
      * @param string $appKey
      *            la clé de l'application un nom unique issue de la configuration (clé associé à l'applicationConfig)
-     * @param array(arrary()) $environments
+     * @param array[array] $environments
      *            tableau les objets environnements
-     * @param array(array()) $urlHandlersConfig
+     * @param array[array] $urlHandlersConfig
      *            configuration des URLHandlers
      * @param ApplicationType $appType
      *            type d'application qui permet de savoir quelles sous applications instancier
      */
     function __construct($applicationConfig, $appKey, $environments, $urlHandlersConfig, ApplicationType $appType)
     {
-        // dump($applicationConfig);
+
         $this->appName = $applicationConfig['appName'];
         $this->appKey = $appKey;
         $this->appType = $appType;
         $this->environments = $environments;
+        $this->urlHandlersConfigs = $urlHandlersConfig;
         
         $this->versionManager = new VersionManager(new ColorManager());
         // création du validateur de version
@@ -126,16 +135,22 @@ abstract class Application
     /**
      * Check URL Handler application configuration consistency.
      * Check this point :
-     * - Check if all URl Handler env defined (except default) in the application exist in environment list, if not an exception is thrown.
+     * - Check if all URl Handler env defined (except default) in the application exist in environment list, if not, an exception is thrown
+     * - check if all declared URL Handler for this application.
      *
      * @throws InvalidConfigurationException if the URLHandler env declared in application doesn't exist.
      */
     private function checkURLHandlerApplicationConfiguration($config)
     {
-        foreach ($config as $key => $value) {
+        foreach ($config as $envKey => $urlHandlerConfig) {
             
-            if ($key != 'default' && ! array_key_exists($key, $this->environments)) {
-                throw new InvalidConfigurationException('The URLHandler configuration for application "' . $this->appName . '" was wrong. Environment "' . $key . '" is not defined in environment list ! ');
+            if ($envKey != 'default' && ! array_key_exists($envKey, $this->environments)) {
+                
+                throw new InvalidConfigurationException('The URLHandler configuration of  "' . $this->appName . '" application is wrong.Environment "' . $envKey . '" used is not defined in environment list ! Available Environment ' . implode(', ', array_keys($this->environments)));
+            }
+            
+            if (! array_key_exists($urlHandlerConfig['handler'], $this->urlHandlersConfigs)) {
+                throw new InvalidConfigurationException('The URLHandler "' . $urlHandlerConfig['handler'] . '" used in configuration of "' . $this->appName . '" application was not declared. Available URLHandler : ' . implode(', ', array_keys($this->urlHandlersConfigs)) . '.');
             }
         }
     }
