@@ -97,7 +97,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
      * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      * @expectedExceptionMessaThe URLHandler configuration of  "my fantastic app" application is wrong.Environment "cus" used is not defined in environment list ! Available Environment dev, prodge 
      */
-    public function testcheckURlHandlerConfigurationAgainstAvailableEnvironment()
+    public function testcheckUrlHandlerConfigurationAgainstAvailableEnvironment()
     {
         $this->application = new DefaultApplication($this->applicationConfig, $this->appKey, $this->environments, $this->urlHandlersConfig, $this->appType);
     }
@@ -107,7 +107,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
      * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      * @expectedExceptionMessage The URLHandler "MyURLHandlerProd" used in configuration of "my fantastic app" application was not declared. Available URLHandler : FullHostURLHandler, MyURLHandler.
      */
-    public function testCheckURlHandlerConfigurationUsedByApplication()
+    public function testCheckUrlHandlerConfigurationUsedByApplication()
     {
         $this->applicationConfig = array(
             'URLHandler' => array(
