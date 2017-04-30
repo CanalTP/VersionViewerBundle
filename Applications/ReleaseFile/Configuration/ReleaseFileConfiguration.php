@@ -48,6 +48,18 @@ class ReleaseFileConfiguration
     {
         return $this->filteredProperties;
     }
+    
+    /**
+     * return the defintion of a property as defined in configuration : (ie status : applicaiton.status => applicaiton .status)
+     * @param string $property name of the property which retrieve definition
+     */
+    public function getFilteredPropertyDefinition($property){
+        
+        if(!isset($this->filteredProperties[$property])){
+            return false;
+        }
+        return $this->filteredProperties[$property];
+    }
 
     /**
      *

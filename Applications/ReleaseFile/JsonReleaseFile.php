@@ -4,6 +4,7 @@ namespace Bbr\VersionViewerBundle\Applications\ReleaseFile;
 use Bbr\VersionViewerBundle\Applications\Environment;
 use Bbr\VersionViewerBundle\Applications\ReleaseFile\Configuration\ReleaseFileConfiguration;
 use Bbr\VersionViewerBundle\Applications\ReleaseFileLoader\ReleaseFileLoadingException;
+use Bbr\VersionViewerBundle\Applications\ReleaseFile\Exception\ReleaseFilePropertyNotFoundException;
 
 /**
  *
@@ -68,20 +69,25 @@ class JsonReleaseFile extends ReleaseFile
     {
         $json = json_decode($content);
         
-        foreach ($this->configuration->getTransformedFilteredProperties() as $propertie => $path) {
+        foreach ($this->configuration->getTransformedFilteredProperties() as $property => $path) {
             
             $jsonObject = $json;
             // needed for handle properties with '/' within
             
-            foreach ($path as $p) {
-                
-                if (isset($jsonObject->{$p})) {
-                    $jsonObject = $jsonObject->{$p};
-                    $this->properties[$propertie] = $jsonObject;
-                } else {
-                    $this->addUnfoundPropertyWarning($this->environment, $p);
-                    $this->properties[$propertie] = 'not found !';
+            try {
+                foreach ($path as $p) {
+                    
+                    if (isset($jsonObject->{$p})) {
+                        $jsonObject = $jsonObject->{$p};
+                        $this->properties[$property] = $jsonObject;
+                    } else {
+                        //if we don't found status for status.error, exit for loop and add a warning in catch block.
+                        throw new ReleaseFilePropertyNotFoundException('propertie '.$property.'not found ! Actual path : '.$p);
+                    }
                 }
+            } catch (ReleaseFilePropertyNotFoundException $e) {
+                $this->addUnfoundPropertyWarning($this->environment, $property, $this->configuration->getFilteredPropertyDefinition($property));
+                $this->properties[$property] = 'not found !';
             }
         }
     }

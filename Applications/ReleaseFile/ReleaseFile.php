@@ -80,7 +80,7 @@ abstract class ReleaseFile
 
     const RELEASE_FILE_UNFOUND_PROPERTY_ERROR = 'Property <strong>%s</strong> couldn\'t be found in Release File content in <strong>%s</strong> environment !';
 
-    const RELEASE_FILE_UNFOUND_PROPERTY_WARNING = 'Property <strong>%s</strong> couldn\'t be found in Release File content in <strong>%s</strong> environment !';
+    const RELEASE_FILE_UNFOUND_PROPERTY_WARNING = 'Property <strong>%s</strong> (path : %s) couldn\'t be found in Release File content in <strong>%s</strong> environment !';
 
     /**
      *
@@ -178,7 +178,7 @@ abstract class ReleaseFile
     /**
      * Return warning messages
      *
-     * @return string error content
+     * @return array[string] error content
      */
     public function getWarnings()
     {
@@ -250,9 +250,9 @@ abstract class ReleaseFile
      * @param string $property
      *            unfound property name
      */
-    public function addUnfoundPropertyWarning(Environment $environment, $property)
+    public function addUnfoundPropertyWarning(Environment $environment, $property, $path)
     {
-        $this->addWarning(sprintf(self::RELEASE_FILE_UNFOUND_PROPERTY_WARNING, $property, $environment->getName()));
+        $this->addWarning(sprintf(self::RELEASE_FILE_UNFOUND_PROPERTY_WARNING, $property, $path, $environment->getName()));
     }
 
     /**

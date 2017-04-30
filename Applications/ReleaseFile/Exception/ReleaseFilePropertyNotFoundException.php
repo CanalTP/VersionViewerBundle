@@ -2,7 +2,8 @@
 namespace Bbr\VersionViewerBundle\Applications\ReleaseFile\Exception;
 
 /**
- *
+ * Thrown in case of an unfound property
+ * 
  * @author bbonnesoeur
  *        
  */
