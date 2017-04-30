@@ -6,7 +6,7 @@ namespace Bbr\VersionViewerBundle\Applications\ReleaseFile\Exception;
  * @author bbonnesoeur
  *        
  */
-class ReleaseFilePropertyNotFoundException extends \Exception
+class ReleaseFileParsingException extends \Exception
 {
 
     public function __construct($message)
