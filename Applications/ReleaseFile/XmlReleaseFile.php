@@ -78,16 +78,16 @@ class XmlReleaseFile extends ReleaseFile
         
         $xpath = new \DOMXPath($XmlDocument);
         // process each configured xpath against xml
-        foreach ($this->configuration->getFilteredProperties() as $propertie => $xpathExpression) {
+        foreach ($this->configuration->getFilteredProperties() as $property => $xpathExpression) {
             
             $resultNode = $xpath->query($xpathExpression);
             
             if ($resultNode && $resultNode->length > 0) {
-                $this->properties[$propertie] = trim($resultNode->item(0)->nodeValue);
+                $this->properties[$property] = trim($resultNode->item(0)->nodeValue);
             } else {
                 
-                $this->properties[$propertie] = 'ERROR : unfound propertie : ' . $xpathExpression;
-                $this->addUnfoundPropertyWarning($this->environment, $xpathExpression);
+                $this->properties[$property] = 'ERROR : unfound propertie : ' . $xpathExpression;
+                $this->addUnfoundPropertyWarning($this->environment, $property, $xpathExpression);
             }
         }
     }

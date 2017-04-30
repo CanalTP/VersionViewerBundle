@@ -54,12 +54,12 @@ class TextReleaseFile extends ReleaseFile
     {
         
         // var_dump($this->configuration->getTransformedFilteredProperties ());die;
-        foreach ($this->configuration->getTransformedFilteredProperties() as $propertie => $regexp) {
+        foreach ($this->configuration->getTransformedFilteredProperties() as $property => $regexp) {
             
             if (preg_match("/" . $regexp . "/", $content, $match)) {
-                $this->properties[$propertie] = $match[1];
+                $this->properties[$property] = $match[1];
             } else {
-                $this->addUnfoundPropertyWarning($this->environment, $propertie);
+                $this->addUnfoundPropertyWarning($this->environment, $property, $regexp);
             }
         }
     }
