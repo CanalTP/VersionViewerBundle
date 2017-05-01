@@ -5,8 +5,8 @@ use Bbr\VersionViewerBundle\Applications\AppContext;
 use Bbr\VersionViewerBundle\Entity\Contact;
 use Bbr\VersionViewerBundle\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -63,7 +63,7 @@ class DefaultController extends Controller
         
         if ($request->getMethod() == 'POST') {
             
-            $form->bind($request);
+            $form->handleRequest($request);
             if ($form->isValid()) {
                 
                 $message = \Swift_Message::newInstance()->setSubject('Feedback VersionViewer')
@@ -84,10 +84,10 @@ class DefaultController extends Controller
     }
 
     /**
-     * load all the applcaition instance (all environnment) and return the result in json 
+     * load all the application instance (all environnment) and return the result in json 
      *
      * @param
-     *            string la clé de l'application
+     *            string application key
      *            
      * @return \Symfony\Component\HttpFoundation\Response
      */
