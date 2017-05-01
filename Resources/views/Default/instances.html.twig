@@ -6,7 +6,7 @@
   	</a> 
   </h2>
     <div class="message"></div>
-  {% for appInstance in app.getAppInstances %}
+  {% for appInstance in app.getAppInstance %}
   <div class="highlight col-lg-2 {{ appInstance.getEnvironment.getTrigram }} ">
     <ul class="list-unstyled {{ appInstance.getColor }} instance-infos" id="{{ app.getAppKey }}_{{ appInstance.getEnvironment.getTrigram }}">
       <li >

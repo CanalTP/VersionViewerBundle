@@ -334,18 +334,6 @@ abstract class Application
     }
 
     /**
-     * Retourne les instances de l'applications
-     *
-     * @deprecated use @method getAppInstance() instead
-     * @return array: liste des instances
-     *        
-     */
-    function getAppInstances()
-    {
-        return $this->appInstances;
-    }
-
-    /**
      * return instance according environment requested or all instance if environment ommited
      *
      * @param string $env
