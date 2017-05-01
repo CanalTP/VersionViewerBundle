@@ -55,7 +55,6 @@ class ApplicationFactory
      *            URLHandlers configuration
      * @return Application
      *
-     * @todo remove nv case !
      */
     public static function getApplication(ApplicationType $appType, $applicationConfig, $appKey, $environments, $urlHandlersConfig)
     {
