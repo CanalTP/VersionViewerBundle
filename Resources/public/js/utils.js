@@ -29,28 +29,27 @@ jQuery(function() {
 			url : url,
 			cache : false,
 			success : function(data) {
-				var obj = jQuery.parseJSON(data);
-				if (obj.errors.length == 0) {
+				if (data.errors.length == 0) {
 
 					// /clean previous properties and error
 					property.empty();
 					error.empty();
 
 					// @todo better to pass only properties
-					var properties = parseProperties(obj);
+					var properties = parseProperties(data);
 
 					property.append(properties);
 					
 					//display warning
-					if(obj.warnings.length > 0){
-						addMessages(section, 'warning', obj.warnings);
+					if(data.warnings.length > 0){
+						addMessages(section, 'warning', data.warnings);
 					}
 
 				} else {
 					// display generic error message in instance
 					error.text('An error occured !');
 					// display detailled error message in recap
-					addMessages(section, 'error', obj.errors);
+					addMessages(section, 'error', data.errors);
 
 				}
 				loading.hide();

@@ -2,10 +2,9 @@ bbr_version_viewer_homepage:
     path:  /
     defaults: { _controller: BbrVersionViewerBundle:Default:index }
 
-#if _format: json is given seems that jquery can't parse the result ... 
 bbr_version_viewer_LoadInstance:
     path:  /loadApp/{appKey}/{env}
-    defaults: { _controller: BbrVersionViewerBundle:Default:loadAppInstance }
+    defaults: { _controller: BbrVersionViewerBundle:Default:loadAppInstance, _format: json }
 bbr_version_viewer_LoadApplication:
     path:  /loadApp/{appKey}/
     defaults: { _controller: BbrVersionViewerBundle:Default:loadApplication, _format: json }
