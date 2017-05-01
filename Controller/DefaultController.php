@@ -120,23 +120,23 @@ class DefaultController extends Controller
      *
      * @param
      *            string
-     *            application name
+     *            application key 
      * @param
      *            environnement
      *            
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function loadAppInstanceAction($appHost, $env)
+    public function loadAppInstanceAction($appKey, $env)
     {
         $context = $this->getAppContext();
         
-        $application = $context->getApplication($appHost);
+        $application = $context->getApplication($appKey);
         if (! $application) {
-            throw $this->createNotFoundException('Application #' . $appHost . ' does not exist.');
+            throw $this->createNotFoundException('Application #' . $appKey . ' does not exist.');
         }
         
         if (! $application->loadVersion($env)) {
-            throw $this->createNotFoundException('Application #' . $appHost . ' Can\'t be loaded in #' . $env . ' environment : ' . $application->getAppInstance($env)
+            throw $this->createNotFoundException('Application #' . $appKey . ' Can\'t be loaded in #' . $env . ' environment : ' . $application->getAppInstance($env)
                 ->getErrorsAsString());
         }
         
