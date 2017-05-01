@@ -91,13 +91,13 @@ class DefaultController extends Controller
      *            
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function loadApplicationAction($appHost)
+    public function loadApplicationAction($appKey)
     {
         $context = $this->getAppContext();
         
-        $application = $context->getApplication($appHost);
+        $application = $context->getApplication($appKey);
         if (! $application) {
-            throw $this->createNotFoundException('Application #' . $appHost . ' does not exist.');
+            throw $this->createNotFoundException('Application #' . $appKey . ' does not exist.');
         }
         
         $application->loadVersion();
