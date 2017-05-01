@@ -55,7 +55,15 @@ jQuery(function() {
 				loading.hide();
 			},
 			error : function(xhr, textStatus, errorThrown) {
-				error.text(textStatus);
+				// @TODO handle full message with accordion ?
+				//display detailed error message in recap
+				addMessages(section, textStatus, errorThrown + ':'
+						+ xhr.responseText.substring(0, 300) + ' ...');
+				// display generic error message in instance
+				error.text('An error occured !');
+				
+				// hide loader
+				loading.hide();
 			}
 		});
 	});
@@ -114,7 +122,7 @@ jQuery(function() {
 							}
 
 							ul.find('.loading').hide();
-						}// fin boucle instance
+						}// end instance loop
 
 						// for each level of error message
 						for ( var level in data.messages) {
@@ -194,7 +202,7 @@ jQuery(function() {
 
 		// not so clean method to map BS class
 		var alertClass
-		if (level == 'error') {
+		if (level == 'error' || level =='parsererror') {
 			alertClass = 'danger';
 		} else {
 			alertClass = level
