@@ -10,7 +10,7 @@ namespace Bbr\VersionViewerBundle\Applications;
 use Bbr\VersionViewerBundle\Applications\Application;
 use Bbr\VersionViewerBundle\Applications\ApplicationType\ApplicationType;
 use Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
-use Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 
 class AppContext
 {
@@ -123,7 +123,7 @@ class AppContext
             $config['enabled'] = false;
         } else {
             if (! isset($configuration['feedback_email']['from']) || ! isset($configuration['feedback_email']['to'])) {
-                throw new InvalidTypeException('You must specify "from" and "to" parameters if you enabled feedback form !');
+                throw new InvalidConfigurationException('You must specify "from" and "to" parameters if you enabled feedback form !');
             }
             
             $config = $configuration['feedback_email'];
