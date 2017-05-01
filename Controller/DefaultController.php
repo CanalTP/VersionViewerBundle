@@ -5,8 +5,8 @@ use Bbr\VersionViewerBundle\Applications\AppContext;
 use Bbr\VersionViewerBundle\Entity\Contact;
 use Bbr\VersionViewerBundle\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {

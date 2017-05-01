@@ -5,27 +5,35 @@ namespace Bbr\VersionViewerBundle\Entity;
 // use Symfony\Component\Validator\Constraints\NotBlank;
 /**
  *
- * Elements du formulaire de contact
+ * Contact form entity
  *
  * @author bbonnesoeur
  *        
  */
 class Contact
 {
-    protected $name;
-    
-    protected $body;
-    
-//     public static function loadValidatorMetadata(ClassMetadata $metadata)
-//     {
-//         $metadata->addPropertyConstraint('name', new NotBlank());
-    
-//         $metadata->addPropertyConstraint('body', new NotBlank());
-//     }
 
     /**
      *
-     * @return the unknown_type
+     * @var string name
+     */
+    protected $name;
+
+    /**
+     *
+     * @var string email
+     */
+    protected $email;
+
+    /**
+     *
+     * @var string message
+     */
+    protected $body;
+
+    /**
+     *
+     * @return string the name
      */
     public function getName()
     {
@@ -34,7 +42,7 @@ class Contact
 
     /**
      *
-     * @param unknown_type $name            
+     * @param string $name            
      */
     public function setName($name)
     {
@@ -44,7 +52,7 @@ class Contact
 
     /**
      *
-     * @return the unknown_type
+     * @return string the body message
      */
     public function getBody()
     {
@@ -53,13 +61,29 @@ class Contact
 
     /**
      *
-     * @param unknown_type $body            
+     * @param string $body            
      */
     public function setBody($body)
     {
         $this->body = $body;
         return $this;
     }
- 
-    
+
+    /**
+     *
+     * @return string the $email
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     *
+     * @param string $email            
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
 }
