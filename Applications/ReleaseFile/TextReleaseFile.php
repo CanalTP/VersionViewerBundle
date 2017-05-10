@@ -59,6 +59,7 @@ class TextReleaseFile extends ReleaseFile
             if (preg_match("/" . $regexp . "/", $content, $match)) {
                 $this->properties[$property] = $match[1];
             } else {
+                $this->properties[$property] = 'not found !';
                 $this->addUnfoundPropertyWarning($this->environment, $property, $regexp);
             }
         }
