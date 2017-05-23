@@ -45,17 +45,12 @@ class JsonReleaseFileTest extends \PHPUnit_Framework_TestCase
         $this->releaseFileConfiguration = new ReleaseFileConfiguration();
         $this->releaseFileConfiguration->setPropertieTransformer(new JsonPropertieTransformer());
         
-        $this->releaseFileConfiguration->setFilteredProperties(array(
-            'version' => 'connector.version'
-            // 'last received' => 'connector.last_received'
-        ));
-        
         $this->jsonReleaseFile = new JsonReleaseFile($this->env, $this->releaseFileConfiguration);
         $this->jsonReleaseFile->setLoader(new LocalReleaseFileLoader(__DIR__ . '/../Fixtures/jsonReleaseFile.json'));
     }
 
     /**
-     * Test propertie at root level and at object level
+     * Test property at root level and at object level
      */
     public function testFilteredDataFoundPropertie()
     {
