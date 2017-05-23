@@ -3,7 +3,6 @@ use Bbr\VersionViewerBundle\Applications\Environment;
 use Bbr\VersionViewerBundle\Applications\ReleaseFile\Configuration\JsonPropertieTransformer;
 use Bbr\VersionViewerBundle\Applications\ReleaseFile\Configuration\ReleaseFileConfiguration;
 use Bbr\VersionViewerBundle\Applications\ReleaseFile\JsonReleaseFile;
-use Bbr\VersionViewerBundle\Applications\ReleaseFileLoader\HttpReleaseFileLoader;
 use Bbr\VersionViewerBundle\Applications\ReleaseFileLoader\LocalReleaseFileLoader;
 
 /**
