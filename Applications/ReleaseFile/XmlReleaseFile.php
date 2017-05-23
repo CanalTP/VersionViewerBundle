@@ -86,7 +86,7 @@ class XmlReleaseFile extends ReleaseFile
                 $this->properties[$property] = trim($resultNode->item(0)->nodeValue);
             } else {
                 
-                $this->properties[$property] = 'ERROR : unfound propertie : ' . $xpathExpression;
+                $this->properties[$property] = 'not found !';
                 $this->addUnfoundPropertyWarning($this->environment, $property, $xpathExpression);
             }
         }
