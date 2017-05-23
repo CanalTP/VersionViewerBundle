@@ -92,17 +92,18 @@ class JsonReleaseFileTest extends \PHPUnit_Framework_TestCase
         
         $this->assertTrue($expectedResult == $this->jsonReleaseFile->getPropertiesJson());
     }
-    
+
     /**
      * Test if filtered data had only two warning if the first object was not found
      * ie : if we are looking for status.status => should have only one warning for property status
      */
-    public function testFilteredDataObjectHasWarning(){
+    public function testFilteredDataObjectHasWarning()
+    {
         $this->releaseFileConfiguration->setFilteredProperties(array(
             'status' => 'status.status',
             'connexion' => 'connexion'
-        
         ));
+        
         $this->jsonReleaseFile->load();
         
         $expectedResult = json_encode(array(
@@ -112,5 +113,4 @@ class JsonReleaseFileTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($expectedResult == $this->jsonReleaseFile->getPropertiesJson());
         $this->assertEquals(2, count($this->jsonReleaseFile->getWarnings()));
     }
-    
 }
