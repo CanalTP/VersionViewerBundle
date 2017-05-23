@@ -13,7 +13,7 @@ use Bbr\VersionViewerBundle\Applications\ReleaseFileLoader\LocalReleaseFileLoade
  *
  *         Implement test on method defined in the AbstractReleaseFile Class.
  */
-class textReleaseFileTest extends \PHPUnit_Framework_TestCase
+class TextReleaseFileTest extends \PHPUnit_Framework_TestCase
 {
     
     /**
@@ -44,11 +44,6 @@ class textReleaseFileTest extends \PHPUnit_Framework_TestCase
         ));
         
         $this->releaseFileConfiguration = new ReleaseFileConfiguration();
-        
-        $this->releaseFileConfiguration->setFilteredProperties(array(
-            'version' => 'Release tag :(.*)',
-            'release date' => 'Release date :(.*)'
-        ));
         
         $this->textReleaseFile = new TextReleaseFile($this->env, $this->releaseFileConfiguration);
         $this->textReleaseFile->setLoader(new LocalReleaseFileLoader(__DIR__ . '/../Fixtures/textReleaseFile.txt'));
