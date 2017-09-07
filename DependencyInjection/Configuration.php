@@ -30,6 +30,7 @@ class Configuration implements ConfigurationInterface
 	        ->arrayNode('appConfig')
 		        ->prototype('array')
 			        ->children()
+// 			        @todo remove this 
 				        ->scalarNode('version')
 					        ->info("Version Viewer Bundle version (refacto needed")
 					        ->example('0.15')

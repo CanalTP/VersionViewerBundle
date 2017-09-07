@@ -1,21 +1,15 @@
 <?php
 namespace Bbr\VersionViewerBundle\Controller;
 
-use Bbr\VersionViewerBundle\Applications\AppContext;
+
 use Bbr\VersionViewerBundle\Entity\Contact;
 use Bbr\VersionViewerBundle\Form\ContactType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class DefaultController extends Controller
+class DefaultController extends BaseController
 {
 
-    /**
-     *
-     * @var array app Configuration
-     */
-    private $appContext;
 
     /**
      * handle home page
@@ -153,24 +147,5 @@ class DefaultController extends Controller
         ));
     }
 
-    /**
-     * Initialize context application
-     * - build all application according to configuration
-     *
-     * @return \Bbr\VersionViewerBundle\Applications\AppContext
-     */
-    private function getAppContext()
-    {
-        if (null === $this->appContext) {
-            $appConfig = $this->container->getParameter('bbr_version_viewer.appConfig');
-            $environments = $this->container->getParameter('bbr_version_viewer.environments');
-            $urlHandler = $this->container->getParameter('bbr_version_viewer.urlHandler');
-            $applications = $this->container->getParameter('bbr_version_viewer.applications');
-            $appTypes = $this->container->getParameter('bbr_version_viewer.applications_type');
-            
-            $this->appContext = new AppContext($environments, $applications, $appConfig, $urlHandler, $appTypes);
-        }
-        
-        return $this->appContext;
-    }
+    
 }

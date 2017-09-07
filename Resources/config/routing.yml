@@ -2,6 +2,10 @@ bbr_version_viewer_homepage:
     path:  /
     defaults: { _controller: BbrVersionViewerBundle:Default:index }
 
+bbr_version_viewer_ExportApplicationVersion:
+    path:  /exportApp/{appKey}
+    defaults: { _controller: BbrVersionViewerBundle:Export:exportApplicationVersion }
+
 bbr_version_viewer_LoadInstance:
     path:  /loadApp/{appKey}/{env}
     defaults: { _controller: BbrVersionViewerBundle:Default:loadAppInstance, _format: json }

@@ -3,7 +3,10 @@
     <a href="{{  path('bbr_version_viewer_LoadApplication', { 'appKey': app.getAppKey })  }}" class="refreshApp" {% if analytics %}trackAppLoad('{{ app.name }}', 'Application Name'){% endif %}>
         {{ app.name }} 
   		<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-  	</a> 
+  	</a>
+  	<a href="{{  path('bbr_version_viewer_ExportApplicationVersion', { 'appKey': app.getAppKey })  }}" class="exportApp" {% if analytics %}trackAppExport('{{ app.name }}', 'Application Name'){% endif %}>
+        <span class="glyphicon glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+    </a>  
   </h2>
     <div class="message"></div>
   {% for appInstance in app.getAppInstance %}

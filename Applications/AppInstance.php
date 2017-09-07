@@ -131,4 +131,17 @@ class AppInstance
     {
         return strip_tags(implode(",", $this->releaseFile->getErrors()));
     }
+
+    /**
+     * return the value of the version (property configured as comparison value)
+     *
+     * @return string the value of the version
+     */
+    public function getVersionValue()
+    {
+        if ($this->getReleaseFile()->isValid()) {
+            return $this->getReleaseFile()->getComparisonValue();
+        }
+        return "N/A";
+    }
 }

@@ -22,5 +22,13 @@
 	  ga('send', 'event', appName, reachSource, 'Reach release file');
 	  /* alert(" event sended ! " + appName +" / "+ reachSource + " / Reach release file"); */
   }
+
+  /**
+   * Send a google analytics event to track application csv export
+   */
+   function trackAppExport(appName, loadSource){
+         ga('send', 'event', appName, loadSource, 'Application Export');
+         /* alert(" event sended ! " + appName +" / "+ loadSource +" / Application Loading"); */
+   }
   
 </script>

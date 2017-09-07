@@ -24,44 +24,44 @@ use Bbr\VersionViewerBundle\DependencyInjection\Configuration;
  *
  * @author bbonnesoeur
  * @todo translate
- *      
+ *
  */
 abstract class Application
 {
-
+    
     public $appName;
-
+    
     public $appKey;
-
+    
     public $appType;
-
+    
     // tableau des instances d'app avec en clé l'environnement
     public $appInstances = array();
-
+    
     protected $versionManager;
-
+    
     protected $versionValidator;
-
+    
     // gère les messages des validateurs.
     protected $validatorManager;
-
+    
     // configuration des URL Handler
     public $urlHandler = array();
-
+    
     /**
      *
      * @var array[Environment] List of all available Environments in configuration (not only for this particular application)
      * @todo should be moved in an application builder
      */
     private $environments = array();
-
+    
     /**
      *
      * @var array[string] List of all available URLHandlers (not only for this particular application)
      * @todo should be moved in an application builder
      */
     private $urlHandlersConfigs = array();
-
+    
     /**
      * Instancie chaque version de l'application selon les environnements définis dans la configruation
      *
@@ -78,7 +78,7 @@ abstract class Application
      */
     function __construct($applicationConfig, $appKey, $environments, $urlHandlersConfig, ApplicationType $appType)
     {
-
+        
         $this->appName = $applicationConfig['appName'];
         $this->appKey = $appKey;
         $this->appType = $appType;
@@ -121,7 +121,7 @@ abstract class Application
             $this->initInstances($environment, $urlHandlersConfig, $authHandlerConfig, $releaseFileOverwriteConfig, $releaseFileLoaderConfig);
         }
     }
-
+    
     /**
      * Check application configuration.
      * Check This sections :
@@ -131,7 +131,7 @@ abstract class Application
     {
         $this->checkURLHandlerApplicationConfiguration($applicationConfig['URLHandler']);
     }
-
+    
     /**
      * Check URL Handler application configuration consistency.
      * Check this point :
@@ -154,17 +154,17 @@ abstract class Application
             }
         }
     }
-
+    
     /**
      * initialise les différentes instances de l'application.
      * instancie le bon URL handler selon l'environnemnt déclaré dans la configuration
      * Si aucune déclaration n'est déclaré dans aucun des handlers l'instance n'est pas créé
      *
      * @todo ça commence à être compliqué tout ça ... need refactoring => applicationInstanceBuilder
-     *      
-     *      
+     *
+     *
      * @todo pas top, ce n'est pas cette classe qui devrait savoir si elle doit instancier l'application pour cet envrionnement
-     *      
+     *
      * @param Environment $environment
      *            environnement pour lequel doit être instancié l'application
      * @param $urlHandlersConfig configurations
@@ -174,7 +174,7 @@ abstract class Application
      *       Cela doit se passer dans la classe qui instancie cette classe.
      * @param
      *            array[] | null $authHandlerConfig authenticationHandler configuration, null if none specified
-     *            
+     *
      * @param $array[string] $releaseFileOverwriteConfig
      *            configuration overwrite for this application
      * @param $array[string] $releaseFileLoaderConfig
@@ -220,7 +220,7 @@ abstract class Application
         
         // dump($appInstance);
     }
-
+    
     /**
      * init an Authentication handler if needed
      *
@@ -228,7 +228,7 @@ abstract class Application
      *            environment in instanciation
      * @param array[] $urlHandlersConfig
      *            Configurations for all UrlHandler
-     *            
+     *
      * @return AuthenticationHandler
      */
     private function initAuthenticationHandler(Environment $environment, $authHandlerConfig)
@@ -250,7 +250,7 @@ abstract class Application
         
         return $authenticationHandler;
     }
-
+    
     /**
      * initialize the URLHandler for the environment in param
      *
@@ -258,9 +258,9 @@ abstract class Application
      *            environment in instanciation
      * @param array[] $urlHandlersConfig
      *            Configurations for all UrlHandler
-     *            
+     *
      * @return URLHandler | boolean return the instanciated URLHandler or false if no instanciation needed (no configuration)
-     *        
+     *
      * @todo rename form initURLHandler to initHostHandler
      */
     private function initURLHandler(Environment $environment, $urlHandlersConfig)
@@ -270,8 +270,8 @@ abstract class Application
         // check if a specific configuration is defined in the instance application is defined.
         if (isset($this->urlHandler[$environment->getTrigram()])) {
             
-            $urlHandler = $factory::getURLHandler($urlHandlersConfig[$this->urlHandler[$environment->getTrigram()]['handler']]['type'], 
-            $urlHandlersConfig[$this->urlHandler[$environment->getTrigram()]['handler']]);
+            $urlHandler = $factory::getURLHandler($urlHandlersConfig[$this->urlHandler[$environment->getTrigram()]['handler']]['type'],
+                $urlHandlersConfig[$this->urlHandler[$environment->getTrigram()]['handler']]);
             $urlHandler->setHost($this->urlHandler[$environment->getTrigram()]['appHost']);
             // set URL Scheme
             if (isset($this->urlHandler[$environment->getTrigram()]['https'])) {
@@ -292,7 +292,7 @@ abstract class Application
         
         return $urlHandler;
     }
-
+    
     /**
      * validate version against each others
      *
@@ -302,14 +302,14 @@ abstract class Application
      * @todo refacto : this method should be called "control" or "validate". Version validation should be masked
      */
     abstract public function validateVersion();
-
+    
     /**
      * Load application information against instance
      * return all instances if environment is ommited
      *
      * @param string $environment
      *            : environment id
-     *            
+     *
      * @return array : instance with their informations
      */
     public function loadVersion($environment = null)
@@ -332,13 +332,13 @@ abstract class Application
             return $this->getAppInstance($environment)->loadVersion();
         }
     }
-
+    
     /**
      * return instance according environment requested or all instance if environment ommited
      *
      * @param string $env
      *            env id for the requested instance
-     *            
+     *
      * @return AppInstance|array[AppInstance] requested instance or all instance if $env is ommited.
      */
     function getAppInstance($env = null)
@@ -352,7 +352,7 @@ abstract class Application
         }
         return $this->appInstances;
     }
-
+    
     /**
      * retourne le plus ancien tag de toutes les instances
      *
@@ -363,12 +363,12 @@ abstract class Application
     {
         return $this->versionManager->getOldestReleaseTag();
     }
-
+    
     function getName()
     {
         return $this->appName;
     }
-
+    
     function getHost()
     {
         // @TODO il faut gérer ce point le host n'est plus rempli au niveau
@@ -376,18 +376,18 @@ abstract class Application
         // et voir les impacts => je ne vois plus ce que je voulais dire ???
         return $this->appHost;
     }
-
+    
     /**
      * fonction de tri des Applications selon leur nom
      *
-     * @param Application $a            
-     * @param Application $b            
+     * @param Application $a
+     * @param Application $b
      */
     static function sortApplicationByName($a, $b)
     {
         return strcmp($a->getName(), $b->getName());
     }
-
+    
     /**
      * retroune l'objet de validation des versions
      *
@@ -398,27 +398,27 @@ abstract class Application
     {
         return $this->versionValidator;
     }
-
+    
     /**
      * Set le validateur de version
      *
-     * @param VersionValidator $versionValidator            
+     * @param VersionValidator $versionValidator
      */
     public function setVersionValidator(VersionValidator $versionValidator)
     {
         $this->versionValidator = $versionValidator;
     }
-
+    
     public function getAppKey()
     {
         return $this->appKey;
     }
-
+    
     public function setAppKey($appKey)
     {
         $this->appKey = $appKey;
     }
-
+    
     /**
      *
      * @return the application type
