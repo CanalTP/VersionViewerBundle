@@ -7,7 +7,7 @@
     {% set analytics = true  %}
 {% endif %}
 <head>
-  <title>Version Viewer</title>
+  <title>Version Viewer {{ version }}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="{{ asset('bundles/bbrversionviewer/img/favicon.ico') }}" type="image/x-icon">
@@ -30,7 +30,7 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      <span class="navbar-brand" ><strong>Version Viewer </strong></span>
+	      <span class="navbar-brand" ><strong>Version Viewer {{ version }}</strong></span>
 	    </div>
 	    <nav class="collapse navbar-collapse" id="bs-navbar">
 	      <ul class="nav navbar-nav">
