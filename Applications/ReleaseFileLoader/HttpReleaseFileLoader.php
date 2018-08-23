@@ -47,7 +47,7 @@ class HttpReleaseFileLoader extends AbstractReleaseFileLoader
      *
      * @var integer default timeout value used
      */
-    const DEFAULT_TIME_OUT = 2;
+    const DEFAULT_TIME_OUT = 5;
 
     /**
      * init loader with default timeout
@@ -65,6 +65,9 @@ class HttpReleaseFileLoader extends AbstractReleaseFileLoader
             'http' => array(
                 'timeout' => HttpReleaseFileLoader::DEFAULT_TIME_OUT,
                 'ignore_errors' => true
+            ),
+            'ssl' => array(
+                'verify_peer' => false
             )
         );
         
